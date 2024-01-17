@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Check if PYFILE environment variable is set
+if [ -z "$PYFILE" ]; then
+    echo "Error: PYFILE environment variable is not set."
+    exit 1
+fi
+
+# Get the filename without extension
+filename=$(basename -- "$PYFILE")
+filename_no_ext="${filename%.*}"
+
+# Set the output filename
+output_filename="$filename_no_ext.pyc"
+
+# Compile the Python script
+echo "Compiling $PYFILE ..."
+python3 -m py_compile "$PYFILE"
+
+# Check if compilation was successful
+if [ $? -eq 0 ]; then
+    # Rename the compiled file to the desired output filename
+    mv "__pycache__/$filename_no_ext.cpython-*.pyc" "$output_filename"
+    
+    # Clean up the generated "__pycache__" directory
+    rm -r "__pycache__"
+
+    echo "Compilation successful."
+else
+    echo "Error: Compilation failed."
+fi
+
