@@ -1,3 +1,3 @@
 #!/usr/bin/python3
-print("".join(["object", "-", "oriented programming with ", "Python"]))
-
+str = "object-oriented programming with Python"
+print(str[39::-1][::-1])
