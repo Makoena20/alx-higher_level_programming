@@ -3,61 +3,30 @@
 #include "lists.h"
 
 /**
- * reverse_list - Reverses a linked list
- * @head: Pointer to the head of the linked list
- * Return: Pointer to the new head of the reversed list
- */
-listint_t *reverse_list(listint_t *head)
-{
-    listint_t *prev = NULL;
-    listint_t *current = head;
-    listint_t *next = NULL;
-
-    while (current != NULL)
-    {
-        next = current->next;
-        current->next = prev;
-        prev = current;
-        current = next;
-    }
-
-    return prev;
-}
-
-/**
- * is_palindrome - Checks if a singly linked list is a palindrome
- * @head: Pointer to the head of the linked list
- * Return: 1 if the list is a palindrome, 0 otherwise
+ * is_palindrome - checks if a singly linked list is a palindrome
+ * @head: pointer to head of list
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
  */
 int is_palindrome(listint_t **head)
 {
-    listint_t *slow = *head;
-    listint_t *fast = *head;
-    listint_t *first_half = *head;
-    listint_t *second_half;
-    
+    listint_t *current = *head;
+    int arr[1000], i = 0, j;
+
     if (*head == NULL || (*head)->next == NULL)
-        return 1;
+        return (1);
 
-    while (fast != NULL && fast->next != NULL)
+    while (current != NULL)
     {
-        slow = slow->next;
-        fast = fast->next->next;
+        arr[i] = current->n;
+        current = current->next;
+        i++;
     }
 
-    if (fast != NULL) // Odd number of elements, skip the middle one
-        slow = slow->next;
-
-    second_half = reverse_list(slow);
-
-    while (second_half != NULL)
+    for (j = 0; j < i / 2; j++)
     {
-        if (first_half->n != second_half->n)
-            return 0;
-        first_half = first_half->next;
-        second_half = second_half->next;
+        if (arr[j] != arr[i - j - 1])
+            return (0);
     }
 
-    return 1;
+    return (1);
 }
-
