@@ -1,30 +1,22 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.8
 import dis
-import types
 import sys
-import marshal
 
-def print_hidden_names(filename):
-    with open(filename, 'rb') as file:
-        magic = file.read(4)
+def print_hidden_names():
+    if len(sys.argv) != 1:
+        return
+
+    with open("hidden_4.pyc", "rb") as file:
+        magic_number = file.read(4)
         timestamp = file.read(4)
-        code = marshal.load(file)
+        code_object = compile(file.read(), '', 'exec')
 
-    names = set()
-    for instruction in code.co_code:
-        if isinstance(instruction, types.CodeType):
-            names.update(instruction.co_names)
+        names = [name for name in code_object.co_names if not name.startswith('__')]
+        names.sort()
 
-    filtered_names = sorted(name for name in names if not name.startswith('__'))
-
-    for name in filtered_names:
-        print(name)
+        for name in names:
+            print(name)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: ./4-hidden_discovery.py <hidden_4.pyc>")
-        sys.exit(1)
-
-    filename = sys.argv[1]
-    print_hidden_names(filename)
+    print_hidden_names()
 
