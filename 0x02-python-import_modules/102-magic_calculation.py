@@ -1,6 +1,4 @@
 def magic_calculation(a, b):
-    c = 0
-
     if a < b:
         add = __import__('magic_calculation_102').add
         sub = __import__('magic_calculation_102').sub
@@ -10,7 +8,10 @@ def magic_calculation(a, b):
             c = add(c, i)
 
         return c
-
     else:
-        return sub(a, b)
+        return __import__('magic_calculation_102').sub(a, b)
+
+if __name__ == "__main__":
+    print(magic_calculation(10, 15))  # Correct output: FAKE magiccalculation_102
+    print(magic_calculation(23, 17))  # Correct output: FAKE magiccalculation_102
 
