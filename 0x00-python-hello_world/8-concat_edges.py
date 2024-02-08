@@ -1,3 +1,6 @@
 #!/usr/bin/python3
-str = "object-oriented programming with Python"
-print(str[39::-1][::-1])
+import sys
+
+sys.stdout.write(
+    "object" + "oriented" + " programming" + " with" + " Python" + "\n"
+)
