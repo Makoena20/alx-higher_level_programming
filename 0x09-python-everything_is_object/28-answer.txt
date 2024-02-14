@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+"""
+This module contains the answer to a question about Python object IDs.
+"""
+
+
+def answer():
+    """
+    This function returns No, the last line will not print 139926795932424.
+    """
+    return "No\n"
+
+if __name__ == "__main__":
+    print(answer(), end="")
+
