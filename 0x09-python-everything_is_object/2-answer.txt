@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+"""
+This module contains the answer to whether a and b point to the same object.
+"""
+
+a = 89
+b = 100
+
+# Answer: No
