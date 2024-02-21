@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""BaseGeometry class."""
 
 class BaseGeometry:
-    """Represents the base geometry."""
-
     def area(self):
-        raise NotImplementedError("area() is not implemented")
+        """
+        Public instance method to compute the area.
 
-    def __str__(self):
-        return f"[BaseGeometry]"
+        Raises:
+            Exception: Indicates that the method is not implemented.
+        """
+        raise Exception("area() is not implemented")
