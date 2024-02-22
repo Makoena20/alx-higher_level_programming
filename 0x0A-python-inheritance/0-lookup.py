@@ -1,14 +1,11 @@
 #!/usr/bin/python3
+"""
+Module for looking up available attributes and methods of an object
+"""
+
 
 def lookup(obj):
     """
-    Returns the list of available attributes and methods of an object.
-    
-    Args:
-        obj: An object whose attributes and methods need to be looked up.
-        
-    Returns:
-        A list containing the attributes and methods of the object.
+    Returns a list of available attributes and methods of an object
     """
     return dir(obj)
-
