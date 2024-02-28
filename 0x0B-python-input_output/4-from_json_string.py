@@ -1,14 +1,17 @@
 #!/usr/bin/python3
+"""
+Module to convert JSON string to Python data structure.
+"""
 
 def from_json_string(my_str):
     """
-    Function to convert a JSON string to a Python object.
+    Function to convert a JSON string to a Python data structure.
 
     Args:
-        my_str (str): A JSON string representing an object.
+        my_str (str): JSON string to convert.
 
     Returns:
-        obj: Python object represented by the JSON string.
+        object: Python data structure converted from the JSON string.
     """
     import json
 
@@ -16,6 +19,6 @@ def from_json_string(my_str):
         f.write(my_str)
 
     with open('temp.json', 'r') as f:
-        obj = json.load(f)
+        data = json.load(f)
 
-    return obj
+    return data
