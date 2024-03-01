@@ -1,17 +1,15 @@
 #!/usr/bin/python3
+"""
+Module for read_file
+"""
+
+
 def read_file(filename=""):
     """
-    Read and print the content of a text file to stdout.
-
+    Function to read a text file (UTF8) and print it to stdout
     Args:
-        filename (str): The name of the file to read.
-
-    Returns:
-        None
+        filename: the file to read
     """
-    with open(filename, 'r', encoding='utf-8') as file:
-        for line in file:
-            print(line, end='')
+    with open(filename, encoding='utf-8') as file:
+        print(file.read(), end="")
 
-# Test cases
-read_file("my_file_0.txt")
