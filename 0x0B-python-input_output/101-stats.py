@@ -1,38 +1,44 @@
 #!/usr/bin/python3
-"""Script that reads stdin line by line and computes metrics."""
+"""
+Reads stdin line by line and computes metrics.
+Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
+Each 10 lines and after a keyboard interruption (CTRL + C), prints statistics since the beginning:
+- Total file size: File size: <total size>
+- Number of lines by status code:
+  possible status codes: 200, 301, 400, 401, 403, 404, 405, and 500
+  format: <status code>: <number>
+  status codes are printed in ascending order
+"""
 
 import sys
 
-def print_stats(total_size, status_codes):
-    """Prints the computed statistics."""
-    print("File size: {}".format(total_size))
-    for code, count in sorted(status_codes.items()):
-        if count > 0:
-            print("{}: {}".format(code, count))
+status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
+status_count = {code: 0 for code in status_codes}
+total_size = 0
+line_count = 0
 
-def main():
-    """Main function to read stdin and compute metrics."""
-    total_size = 0
-    status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
-                    "403": 0, "404": 0, "405": 0, "500": 0}
-
-    try:
-        line_count = 0
-        for line in sys.stdin:
-            try:
-                parts = line.split()
-                size = int(parts[-1])
-                status_code = parts[-2]
-                total_size += size
-                status_codes[status_code] += 1
-                line_count += 1
-            except (IndexError, ValueError):
-                continue
+try:
+    for line in sys.stdin:
+        try:
+            parts = line.split()
+            status_code = int(parts[-2])
+            file_size = int(parts[-1])
+            if status_code in status_codes:
+                status_count[status_code] += 1
+            total_size += file_size
+            line_count += 1
 
             if line_count % 10 == 0:
-                print_stats(total_size, status_codes)
-    except KeyboardInterrupt:
-        print_stats(total_size, status_codes)
+                print("File size: {}".format(total_size))
+                for code in sorted(status_count.keys()):
+                    if status_count[code] > 0:
+                        print("{}: {}".format(code, status_count[code]))
 
-if __name__ == "__main__":
-    main()
+        except (ValueError, IndexError):
+            pass
+
+except KeyboardInterrupt:
+    print("File size: {}".format(total_size))
+    for code in sorted(status_count.keys()):
+        if status_count[code] > 0:
+            print("{}: {}".format(code, status_count[code]))
