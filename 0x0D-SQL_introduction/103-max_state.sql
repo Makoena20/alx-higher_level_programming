@@ -1,10 +1,7 @@
-/*
-Script to display the max temperature of each state (ordered by State name)
-*/
+-- Task: Write a script that displays the max temperature of each state (ordered by State name).
 
-/* Selecting the maximum temperature for each state */
-SELECT State, MAX(Temperature) AS max_temp
-FROM states
-GROUP BY State
-ORDER BY State;
-
+-- Display the max temperature of each state
+SELECT state, MAX(temp) AS max_temp
+FROM temperatures
+GROUP BY state
+ORDER BY state;
