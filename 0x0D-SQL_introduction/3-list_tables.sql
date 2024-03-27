@@ -1,8 +1,20 @@
--- Script to list all tables in a MySQL database
+/*
+Script: 3-list_tables.sql
 
--- Connect to the specified database
-USE `mysql`;
+Description:
+This script lists all the tables of a specified database in MySQL server.
 
--- List all tables in the current database
+Requirements:
+- All SQL keywords should be in uppercase
+- All SQL queries should have a comment just before
+- All your files should start by a comment describing the task
+- All your files should end with a new line
+
+Usage:
+cat 3-list_tables.sql | mysql -hlocalhost -uroot -p mysql
+
+*/
+
+-- SQL query to list all tables in the specified database
 SHOW TABLES;
 
