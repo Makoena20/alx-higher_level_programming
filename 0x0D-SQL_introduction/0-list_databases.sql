@@ -1,12 +1,11 @@
--- Script to list all databases on the MySQL server
+-- Task: Write a SQL script to list all databases of the MySQL server.
 
--- List initial databases sorted
+/* 
+    Script: 0-list_databases.sql
+    Author: [Your Name]
+    Description: This script lists all databases present in the MySQL server.
+*/
+
+-- SELECT statement to list all databases
 SHOW DATABASES;
 
--- Create multiple databases for testing
-CREATE DATABASE test_db1;
-CREATE DATABASE test_db2;
-CREATE DATABASE test_db3;
-
--- List databases after creation sorted
-SHOW DATABASES;
