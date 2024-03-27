@@ -1,7 +1,7 @@
-/*
- * Task: Compute the score average of all records in the table second_table of the database hbtn_0c_0
- */
+-- Script to list the number of records with the same score in the second_table of the hbtn_0c_0 database
 
--- Compute the average score
-SELECT AVG(score) AS average FROM second_table;
-
+-- Count the number of records for each score and display the results sorted by the number of records (descending)
+SELECT score, COUNT(*) AS number
+FROM second_table
+GROUP BY score
+ORDER BY number DESC;
