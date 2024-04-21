@@ -1,12 +1,17 @@
-/*
-Script to list all genres by their rating
-Only one SELECT statement allowed
-Results sorted in descending order by rating
-*/
+-- 103-rating_genres.sql
+-- Write a script that lists all genres in the database hbtn_0d_tvshows_rate by their rating.
+-- Each record should display: tv_genres.name - rating sum
+-- Results must be sorted in descending order by their rating
+-- You can use only one SELECT statement
 
-SELECT tv_genres.name, SUM(tv_genres.rating) AS rating
-FROM tv_genres
-JOIN tv_shows ON tv_genres.show_id = tv_shows.id
-GROUP BY tv_genres.name
-ORDER BY rating DESC;
-
+SELECT
+    tv_genres.name,
+    SUM(tv_shows.rating) AS rating
+FROM
+    tv_genres
+JOIN
+    tv_shows ON tv_genres.id = tv_shows.genre_id
+GROUP BY
+    tv_genres.name
+ORDER BY
+    rating DESC;
