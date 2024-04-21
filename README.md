@@ -1,1 +1,1 @@
-0x07. Python - Test-driven development
+0x0E. SQL - More queries
