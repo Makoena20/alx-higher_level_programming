@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Script that creates a State with a City in the database.
+Script: 100-relationship_states_cities
+Creates a State "California" with City "San Francisco"
 """
 
 import sys
@@ -10,27 +11,23 @@ from relationship_state import Base, State
 from relationship_city import City
 
 if __name__ == "__main__":
-    username = sys.argv[1]
+    user = sys.argv[1]
     password = sys.argv[2]
-    database = sys.argv[3]
+    db_name = sys.argv[3]
 
-    # Database connection
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(username, password, database),
-                           pool_pre_ping=True)
-    Base.metadata.create_all(engine)
+                           .format(user, password, db_name), pool_pre_ping=True)
 
-    # Session creation
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Creating California state with San Francisco city
-    new_state = State(name="California")
-    new_city = City(name="San Francisco", state=new_state)
-    session.add(new_state)
-    session.add(new_city)
+    Base.metadata.create_all(engine)
 
-    # Committing changes and closing session
+    california = State(name="California")
+    san_francisco = City(name="San Francisco", state=california)
+    session.add(california)
+    session.add(san_francisco)
+
     session.commit()
     session.close()
 

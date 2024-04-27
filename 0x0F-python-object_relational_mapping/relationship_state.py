@@ -1,19 +1,22 @@
 #!/usr/bin/python3
 """
-Module that defines the State class.
+Module: relationship_state
+Defines State class
 """
 
-from sqlalchemy import Column, Integer, String
+import sqlalchemy
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from model_city import Base
+from sqlalchemy import Column, Integer, String
+from relationship_city import Base
+
+Base = declarative_base()
 
 
 class State(Base):
-    """
-    State class to represent a state table in the database.
-    """
+    """State class"""
     __tablename__ = 'states'
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete", backref="state")
+    cities = relationship("City", cascade="all, delete-orphan", backref="state")
 
