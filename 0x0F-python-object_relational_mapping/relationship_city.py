@@ -1,16 +1,14 @@
 #!/usr/bin/python3
-"""
-Module for City class.
-"""
+"""Defines the City class."""
 from sqlalchemy import Column, Integer, String, ForeignKey
-from relationship_state import Base
+from relationship_state import Base, State
+
 
 class City(Base):
-    """
-    City class to represent cities table.
-    """
+    """Represents a city for a State."""
+
     __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, nullable=False, unique=True)
+    id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
 
