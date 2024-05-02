@@ -1,21 +1,16 @@
 #!/usr/bin/python3
 """
-Module: relationship_city
-Defines City class
+Module for City class.
 """
-
-import sqlalchemy
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
-from model_state import Base
-
-Base = declarative_base()
-
+from relationship_state import Base
 
 class City(Base):
-    """City class"""
+    """
+    City class to represent cities table.
+    """
     __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, unique=True)
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
 

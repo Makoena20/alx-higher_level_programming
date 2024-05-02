@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Script: 100-relationship_states_cities
-Creates a State "California" with City "San Francisco"
+Script that creates the State “California” with the City “San Francisco”
+from the database hbtn_0e_100_usa.
 """
 
 import sys
@@ -11,23 +11,36 @@ from relationship_state import Base, State
 from relationship_city import City
 
 if __name__ == "__main__":
-    user = sys.argv[1]
+    if len(sys.argv) != 4:
+        print("Usage: {} username password database".format(sys.argv[0]))
+        sys.exit(1)
+
+    username = sys.argv[1]
     password = sys.argv[2]
-    db_name = sys.argv[3]
+    database = sys.argv[3]
 
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(user, password, db_name), pool_pre_ping=True)
+    # Create the connection string
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
+                           format(username, password, database))
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
+    # Create all tables in the engine
     Base.metadata.create_all(engine)
 
-    california = State(name="California")
-    san_francisco = City(name="San Francisco", state=california)
-    session.add(california)
-    session.add(san_francisco)
+    # Create a configured "Session" class
+    Session = sessionmaker(bind=engine)
 
+    # Create a Session
+    session = Session()
+
+    # Add California state
+    california = State(name="California")
+    session.add(california)
     session.commit()
+
+    # Add San Francisco city
+    san_francisco = City(name="San Francisco", state=california)
+    session.add(san_francisco)
+    session.commit()
+
     session.close()
 
