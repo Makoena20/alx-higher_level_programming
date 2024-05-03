@@ -1,14 +1,9 @@
--- Create id_not_null table if it doesn't exist
+-- This script creates the table id_not_null if it doesn't already exist,
+-- with id set as INT with default value 1 and name as VARCHAR(256).
+-- It ensures that the id column is not nullable.
+
 CREATE TABLE IF NOT EXISTS id_not_null (
-    id INT DEFAULT 1,
+    id INT NOT NULL DEFAULT 1,
     name VARCHAR(256)
 );
-
--- Insert data into id_not_null table
-INSERT INTO id_not_null (id, name) VALUES (1, "Holberton School");
-INSERT INTO id_not_null (id, name) VALUES (1, "Python is cool");
-INSERT INTO id_not_null (id, name) VALUES (2, "Holberton");
-INSERT INTO id_not_null (id, name) VALUES (3, "School");
-INSERT INTO id_not_null (id, name) VALUES (4, "C is fun");
-INSERT INTO id_not_null (id, name) VALUES (89, "Best School");
 
