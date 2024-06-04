@@ -6,19 +6,19 @@ const apiUrl = process.argv[2];
 
 request(apiUrl, (error, response, body) => {
   if (error) {
-    console.error('Error:', error);
+    console.error(error);
     return;
   }
 
-  const tasks = JSON.parse(body);
+  const todos = JSON.parse(body);
   const completedTasks = {};
 
-  tasks.forEach((task) => {
-    if (task.completed) {
-      if (!completedTasks[task.userId]) {
-        completedTasks[task.userId] = 0;
+  todos.forEach(todo => {
+    if (todo.completed) {
+      if (!completedTasks[todo.userId]) {
+        completedTasks[todo.userId] = 0;
       }
-      completedTasks[task.userId] += 1;
+      completedTasks[todo.userId] += 1;
     }
   });
 
